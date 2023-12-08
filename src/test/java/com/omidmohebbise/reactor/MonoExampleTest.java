@@ -20,4 +20,22 @@ public class MonoExampleTest {
                 .verifyComplete();
     }
 
+    @Test
+    public void monoErrorHandler() {
+        String name = "Omid Mohebbi";
+        Mono<String> mono = Mono.just(name).map(s -> {
+            throw new RuntimeException("An error occurred");
+        });
+
+        mono.subscribe(s -> log.info("Value is {}", s), throwable -> log.error("Something bad happened"));
+        mono.subscribe(s -> log.info("Value is {}", s), Throwable::printStackTrace);
+
+        StepVerifier.create(mono)
+                .expectError(RuntimeException.class)
+                .verify();
+
+    }
+
+
+
 }
