@@ -15,7 +15,6 @@ import java.util.Scanner;
  */
 @Slf4j
 public class MonoExample {
-    // develop a method to show a menu based on the this class function and get number to execute each one
     public static int showMenu() {
         System.out.println("1. simpleMonoExample");
         System.out.println("2. monoErrorHandler");
